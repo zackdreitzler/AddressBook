@@ -5,6 +5,7 @@ package com.example.addressBook;
  * This class was given by the instructor for saving and loading contacts.
  */
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,10 +36,36 @@ public class ContactData {
     private ObservableList<Contact> contacts;
 
     public ContactData() {
-        // *** initialize the contacts list here ***
+        contacts = FXCollections.observableArrayList();
     }
 
-    // *** Add methods to add/delete/access contacts here ***
+    /**
+     * Adds a contact to the contacts list.
+     * @param contact
+     */
+    public void addContact(Contact contact){
+        if(!(contacts.contains(contact))){
+            contacts.add(contact);
+        }
+    }
+
+    /**
+     * Deletes a contact from the contacts list.
+     * @param contact
+     */
+    public void deleteContact(Contact contact){
+        if(contacts.contains(contact)){
+            contacts.remove(contact);
+        }
+    }
+
+    /**
+     * Getter to return list of contacts.
+     * @return contacts
+     */
+    public ObservableList<Contact> getContacts() {
+        return contacts;
+    }
 
     public void loadContacts() {
         try {
