@@ -2,8 +2,7 @@ package com.example.addressBook;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -16,7 +15,18 @@ public class Controller {
     private BorderPane mainWindow;
 
     @FXML
-    public void showNewDialog(){
+    private TableView<Contact> tableView;
+
+    private ContactData data;
+
+    public void initialize(){
+        data = new ContactData();
+        data.loadContacts();
+        tableView.setItems(data.getContacts());
+    }
+
+    @FXML
+    public void handleNew(){
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainWindow.getScene().getWindow());
         dialog.setTitle("Add a new Contact.");
@@ -36,17 +46,19 @@ public class Controller {
         if(result.isPresent() && result.get() == ButtonType.OK){
             NewDialogController controller = fxmlLoader.getController();
             Contact contact = controller.processDialog();
+            data.addContact(contact);
+            data.saveContacts();
         }
     }
 
     @FXML
-    public void handleDeleteContact(){
-        //TODo
+    public void handleEdit(){
+        //TODO
         return;
     }
 
     @FXML
-    public void handleExit(){
+    public void handleDelete(){
         //TODO
         return;
     }
