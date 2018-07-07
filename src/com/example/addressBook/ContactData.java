@@ -44,9 +44,7 @@ public class ContactData {
      * @param contact
      */
     public void addContact(Contact contact){
-        if(!(contacts.contains(contact))){
-            contacts.add(contact);
-        }
+        contacts.add(contact);
     }
 
     /**
@@ -54,9 +52,7 @@ public class ContactData {
      * @param contact
      */
     public void deleteContact(Contact contact){
-        if(contacts.contains(contact)){
             contacts.remove(contact);
-        }
     }
 
     /**
@@ -79,6 +75,7 @@ public class ContactData {
 
             while (eventReader.hasNext()) {
                 XMLEvent event = eventReader.nextEvent();
+
                 if (event.isStartElement()) {
                     StartElement startElement = event.asStartElement();
                     // If we have a contact item, we create a new contact
@@ -88,25 +85,29 @@ public class ContactData {
                     }
 
                     if (event.isStartElement()) {
-                        if (event.asStartElement().getName().getLocalPart().equals(FIRST_NAME)) {
-                                event = eventReader.nextEvent();
-                                contact.setFirstName(event.asCharacters().getData());
-                                continue;
+                        if (event.asStartElement().getName().getLocalPart()
+                                .equals(FIRST_NAME)) {
+                            event = eventReader.nextEvent();
+                            contact.setFirstName(event.asCharacters().getData());
+                            continue;
                         }
                     }
-                    if (event.asStartElement().getName().getLocalPart().equals(LAST_NAME)) {
+                    if (event.asStartElement().getName().getLocalPart()
+                            .equals(LAST_NAME)) {
                         event = eventReader.nextEvent();
                         contact.setLastName(event.asCharacters().getData());
                         continue;
                     }
 
-                    if (event.asStartElement().getName().getLocalPart() .equals(PHONE_NUMBER)) {
+                    if (event.asStartElement().getName().getLocalPart()
+                            .equals(PHONE_NUMBER)) {
                         event = eventReader.nextEvent();
                         contact.setPhoneNumber(event.asCharacters().getData());
                         continue;
                     }
 
-                    if (event.asStartElement().getName().getLocalPart().equals(NOTES)) {
+                    if (event.asStartElement().getName().getLocalPart()
+                            .equals(NOTES)) {
                         event = eventReader.nextEvent();
                         contact.setNotes(event.asCharacters().getData());
                         continue;
@@ -123,7 +124,7 @@ public class ContactData {
             }
         }
         catch (FileNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         catch (XMLStreamException e) {
             e.printStackTrace();
@@ -136,7 +137,8 @@ public class ContactData {
             // create an XMLOutputFactory
             XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
             // create XMLEventWriter
-            XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(CONTACTS_FILE));
+            XMLEventWriter eventWriter = outputFactory
+                    .createXMLEventWriter(new FileOutputStream(CONTACTS_FILE));
             // create an EventFactory
             XMLEventFactory eventFactory = XMLEventFactory.newInstance();
             XMLEvent end = eventFactory.createDTD("\n");
@@ -175,7 +177,8 @@ public class ContactData {
         XMLEvent end = eventFactory.createDTD("\n");
 
         // create contact open tag
-        StartElement configStartElement = eventFactory.createStartElement("", "", CONTACT);
+        StartElement configStartElement = eventFactory.createStartElement("",
+                "", CONTACT);
         eventWriter.add(configStartElement);
         eventWriter.add(end);
         // Write the different nodes
@@ -188,7 +191,8 @@ public class ContactData {
         eventWriter.add(end);
     }
 
-    private void createNode(XMLEventWriter eventWriter, String name, String value) throws XMLStreamException {
+    private void createNode(XMLEventWriter eventWriter, String name,
+                            String value) throws XMLStreamException {
 
         XMLEventFactory eventFactory = XMLEventFactory.newInstance();
         XMLEvent end = eventFactory.createDTD("\n");
@@ -205,4 +209,6 @@ public class ContactData {
         eventWriter.add(eElement);
         eventWriter.add(end);
     }
+
 }
+
