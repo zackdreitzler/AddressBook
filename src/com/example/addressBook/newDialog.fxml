@@ -13,13 +13,17 @@
     <content>
         <GridPane vgap="10" hgap="10">
             <Label text="Enter the contact's First Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <TextField GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField GridPane.rowIndex="1" GridPane.columnIndex="0" fx:id="firstNameField"/>
+
             <Label text="Enter the contact's Last Name" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <TextField GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField GridPane.rowIndex="3" GridPane.columnIndex="0" fx:id="lastNameField"/>
+
             <Label text="Enter the contact's Phone Number" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-            <TextField GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField GridPane.rowIndex="5" GridPane.columnIndex="0" fx:id="phoneNumberField"/>
+
             <Label text="Enter notes about the contact" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-            <TextArea GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <TextArea GridPane.rowIndex="7" GridPane.columnIndex="0" fx:id="notesArea"/>
+
         </GridPane>
     </content>
 </DialogPane>
